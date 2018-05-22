@@ -8,7 +8,7 @@ import { CommonService } from '../service/common.service'
     selector: 'app-show-post',
     templateUrl: './show-post.component.html',
     styleUrls: [ './show-post.component.css' ],
-    providers: [ShowPostService, CommonService]
+    providers: [ShowPostService]
 })
 
 export class ShowPostComponent implements OnInit {
