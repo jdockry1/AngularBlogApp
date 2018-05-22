@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core'
 
 import { ShowPostService } from './show-post.service'
 import { Post } from '../models/post.model'
@@ -14,6 +14,9 @@ import { CommonService } from '../service/common.service'
 export class ShowPostComponent implements OnInit {
 
     public posts: any[];
+    public post_to_delete: Post;
+
+    @ViewChild('closeBtn') closeBtn: ElementRef;
 
     constructor (private showPostService: ShowPostService, private commonService: CommonService) {
 
@@ -35,6 +38,21 @@ export class ShowPostComponent implements OnInit {
 
     editPost(post: Post) {
         this.commonService.setPostToEdit(post);
+    }
+
+    setDelete(post: Post) {
+        this.post_to_delete = post;
+    }
+
+    unsetDelete() {
+        this.post_to_delete = null;
+    }
+
+    deletePost() {
+        this.showPostService.deletePost(this.post_to_delete._id).subscribe(res => {
+            this.getAllPosts();
+            this.closeBtn.nativeElement.click();
+        })
     }
 
 }

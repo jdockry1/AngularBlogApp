@@ -101,5 +101,18 @@ app.post('/api/post/updatePost', (req, res) => {
 })
 
 
+app.post('/api/post/deletePost', (req, res) => {
+    mongoose.connect(url, function(err) {
+        if (err) throw err;
+        Post.findByIdAndRemove(req.body._id,
+        (err, doc) => {
+            if (err) throw err;
+            return res.status(200).json({
+                status: 'success',
+                data: doc
+            })
+        })
+    })
+})
 
 app.listen(3000, () => console.log('Blog server running on port 3000!'))

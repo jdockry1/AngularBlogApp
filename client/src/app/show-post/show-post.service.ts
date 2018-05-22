@@ -12,4 +12,8 @@ export class ShowPostService {
     getAllPosts() {
         return this.http.post('/api/post/getAllPosts', {})
     }
+
+    deletePost(_id) {
+        return this.http.post('/api/post/deletePost', { _id: _id })
+    }
 }
