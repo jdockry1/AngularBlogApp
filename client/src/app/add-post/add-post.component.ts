@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 
 import { AddPostService } from './add-post.service';
 import { Post } from '../models/post.model';
@@ -21,12 +21,26 @@ export class AddPostComponent {
         this.post = new Post();
     }
 
+    ngOnInit() {
+        this.commonService.postEdit_Observable.subscribe(res => {
+            this.post = this.commonService.post_to_be_edited;
+        })
+    }
+
     addPost(){
         if (this.post.title && this.post.description) {
-            this.addPostService.AddPost(this.post).subscribe(res => {
-                this.closeBtn.nativeElement.click();
-                this.commonService.notifyPostAddition();
-            })
+            if(this.post._id) {
+                this.addPostService.UpdatePost(this.post).subscribe(res => {
+                    this.closeBtn.nativeElement.click();
+                    this.commonService.notifyPostAddition();
+                })
+            }
+            else {
+                this.addPostService.AddPost(this.post).subscribe(res => {
+                    this.closeBtn.nativeElement.click();
+                    this.commonService.notifyPostAddition();
+                })
+            }
         }
         else {
             alert("Title and Description required")

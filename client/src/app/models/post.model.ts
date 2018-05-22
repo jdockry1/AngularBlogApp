@@ -1,10 +1,10 @@
 export class Post {
-    public id;
+    public _id;
     public title;
     public description;
 
     constructor() {
-        this.id = '';
+        this._id = '';
         this.title = '';
         this.description = '';
     }
