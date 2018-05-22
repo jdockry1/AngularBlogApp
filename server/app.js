@@ -68,10 +68,10 @@ app.post('/api/post/getAllPosts', (req, res) => {
 app.post('/api/post/createPost', (req, res) => {
     mongoose.connect(url, function(err) {
         if(err) throw err
-        const post = {
+        const post = new Post ({
             title: req.body.title,
             description: req.body.description
-        }
+        })
         post.save((err, doc) => {
             if(err) throw err
             return res.status(200).json({
