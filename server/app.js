@@ -8,13 +8,6 @@ const url = "mongodb+srv://joedockry:joedockry@cluster0-520bx.mongodb.net/test"
 app.use(bodyParser.json)
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/api/user/login', (req, res) => {
-    mongoose.connect(url, function(err) {
-        if(err) throw err;
-        console.log("Connected successfully, username is" + req.body.username + ", password is " + req.body.password);
-    })
-})
-
 app.post('/api/user/login', (req, res) => {
     mongoose.connect(url, {useMongoClient: true}, function(err) {
         if(err) throw err;
@@ -23,7 +16,7 @@ app.post('/api/user/login', (req, res) => {
             password: req.body.password
         }, function(err, user) {
             if(err) throw err;
-            if(user.length == 1) {
+            if(user.length === 1) {
                 return res.status(200).json({
                     status: 'success',
                     data: user
@@ -31,7 +24,7 @@ app.post('/api/user/login', (req, res) => {
             }
             else {
                 return res.status(200).json({
-                    status: 'failed',
+                    status: 'fail',
                     message: 'Login Failed'
                 })
             }
