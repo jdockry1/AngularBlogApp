@@ -2,13 +2,21 @@
     <a *ngFor="let post of posts" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{post.title}}</h5>
-            <small>3 days ago</small>
+            <small>Author: {{post.author}}</small>
+            <small>Date Posted: {{post.date_posted}}</small>
         </div>
         <p class="mb-1">{{post.description}}</p>
 
         
         <div class="d-flex w-100 justify-content-between">
         <small>read more...</small>
+
+        <div>
+            <small>{{post.upvotes}}</small>
+            <i title="Upvote" class="fas fa-thumbs-up" (click)="upvotePost(post)" aria-hidden="true"></i>
+            <small>{{post.downvotes}}</small>
+            <i (click)="downvotePost(post);" title="Downvote" class="fas fa-thumbs-down" aria-hidden="true"></i>
+        </div>
 
         <div>
             <i title="Edit" class="fas fa-edit" (click)="editPost(post)" aria-hidden="true"></i>

@@ -13,7 +13,11 @@ export class AddPostService {
     AddPost(post: Post) {
         return this.http.post('/api/post/createPost', {
             title: post.title,
-            description: post.description
+            description: post.description,
+            author: post.author,
+            date_posted: post.date_posted,
+            upvotes: post.upvotes,
+            downvotes: post.downvotes
         })
     }
 

@@ -16,4 +16,12 @@ export class ShowPostService {
     deletePost(_id) {
         return this.http.post('/api/post/deletePost', { _id: _id })
     }
+
+    upvotePost(_id) {
+        return this.http.post('/api/post/upvotePost', { _id: _id })
+    }
+
+    downvotePost(_id) {
+        return this.http.post('/api/post/downvotePost', { _id: _id })
+    }
 }

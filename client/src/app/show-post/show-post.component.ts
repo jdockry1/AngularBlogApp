@@ -55,4 +55,16 @@ export class ShowPostComponent implements OnInit {
         })
     }
 
+    upvotePost(post: Post) {
+        this.showPostService.upvotePost(post._id).subscribe(res => {
+            this.getAllPosts();
+        })
+    }
+
+    downvotePost(post: Post) {
+        this.showPostService.downvotePost(post._id).subscribe(res => {
+            this.getAllPosts();
+        })
+    }
+
 }

@@ -36,6 +36,10 @@ export class AddPostComponent {
                 })
             }
             else {
+                this.post.author = localStorage.getItem('loggedInUser');
+                this.post.date_posted = this.getDate();
+                this.post.upvotes = 0;
+                this.post.downvotes = 0;
                 this.addPostService.AddPost(this.post).subscribe(res => {
                     this.closeBtn.nativeElement.click();
                     this.commonService.notifyPostAddition();
@@ -45,5 +49,14 @@ export class AddPostComponent {
         else {
             alert("Title and Description required")
         }
+    }
+
+    getDate() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        return (dd + '/' + mm + '/' + yyyy);
     }
 }

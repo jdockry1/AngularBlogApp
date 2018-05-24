@@ -70,7 +70,11 @@ app.post('/api/post/createPost', (req, res) => {
         if(err) throw err
         const post = new Post ({
             title: req.body.title,
-            description: req.body.description
+            description: req.body.description,
+            author: req.body.author,
+            date_posted: req.body.date_posted,
+            upvotes: req.body.upvotes,
+            downvotes: req.body.downvotes
         })
         post.save((err, doc) => {
             if(err) throw err
@@ -89,6 +93,41 @@ app.post('/api/post/updatePost', (req, res) => {
         Post.update(
             { _id: req.body._id },
             { title: req.body.title, description: req.body.description },
+            (err, doc) => {
+                if (err) throw err;
+                return res.status(200).json({
+                    status: 'success',
+                    data: doc
+                })
+            }
+        )
+    })
+})
+
+
+app.post('/api/post/upvotePost', (req, res) => {
+    mongoose.connect(url, function(err) {
+        if (err) throw err
+        Post.findByIdAndUpdate(
+            { _id: req.body._id },
+            { $inc: { upvotes: 1 } },
+            (err, doc) => {
+                if (err) throw err;
+                return res.status(200).json({
+                    status: 'success',
+                    data: doc
+                })
+            }
+        )
+    })
+})
+
+app.post('/api/post/downvotePost', (req, res) => {
+    mongoose.connect(url, function(err) {
+        if (err) throw err
+        Post.findByIdAndUpdate(
+            { _id: req.body._id },
+            { $inc: { downvotes: 1 } },
             (err, doc) => {
                 if (err) throw err;
                 return res.status(200).json({
