@@ -67,4 +67,14 @@ export class ShowPostComponent implements OnInit {
         })
     }
 
+    setSearch(search) {
+        this.showPostService.setSearch(search);
+        this.getAllPosts();
+    }
+
+    setSort(sort) {
+        this.showPostService.setSort(sort);
+        this.getAllPosts();
+    }
+
 }

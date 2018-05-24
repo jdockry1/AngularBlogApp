@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CommonService } from '../service/common.service';
+import { ShowPostService } from '../show-post/show-post.service';
 
 @Component({
     selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent {
 
     @ViewChild('addPost') addBtn: ElementRef;
 
-    constructor (private commonService: CommonService, private router: Router) {
+    constructor (private commonService: CommonService, private router: Router, private showPostService: ShowPostService) {
 
         if (!localStorage.getItem('loggedInUser')) {
             this.router.navigate(['/']);

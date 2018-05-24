@@ -37,7 +37,7 @@ export class AddPostComponent {
             }
             else {
                 this.post.author = localStorage.getItem('loggedInUser');
-                this.post.date_posted = this.getDate();
+                //this.post.date_posted = this.getDate();
                 this.post.upvotes = 0;
                 this.post.downvotes = 0;
                 this.addPostService.AddPost(this.post).subscribe(res => {

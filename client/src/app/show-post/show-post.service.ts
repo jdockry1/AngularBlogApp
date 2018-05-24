@@ -5,12 +5,16 @@ import { Post } from '../models/post.model'
 
 @Injectable()
 export class ShowPostService {
-    constructor(private http: HttpClient) {
+    private search: string = '';
+    private sort: string = 'alpha';
 
+    constructor(private http: HttpClient) {
+        this.search = '';
+        this.sort = 'alpha';
     }
 
     getAllPosts() {
-        return this.http.post('/api/post/getAllPosts', {})
+        return this.http.post('/api/post/getAllPosts', { search: this.search, sort: this.sort })
     }
 
     deletePost(_id) {
@@ -23,5 +27,21 @@ export class ShowPostService {
 
     downvotePost(_id) {
         return this.http.post('/api/post/downvotePost', { _id: _id })
+    }
+
+    setSearch(search) {
+        this.search = search;
+    }
+
+    getSearch() {
+        return this.search;
+    }
+
+    setSort(sort) {
+        this.sort = sort;
+    }
+
+    getSort() {
+        return this.sort;
     }
 }

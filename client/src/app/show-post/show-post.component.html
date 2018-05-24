@@ -1,3 +1,35 @@
+
+<div class="d-flex flex-nowrap border rounded">
+    <div class="order-1 p-2">
+        <input type="text" #searchString (keyup)="setSearch(searchString.value)" placeholder="Search for post..."/>
+    </div>
+    <div class="order-2 p-2">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sorting
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a (click)="setSort('alpha')" class="dropdown-item">Alphabetical</a>
+                <a (click)="setSort('chron')" class="dropdown-item">Chonological</a>
+                <a (click)="setSort('upvotes')" class="dropdown-item">Upvotes</a>
+                <a (click)="setSort('downvotes')" class="dropdown-item">Downvotes</a>
+            </div>
+        </div>
+    </div>
+    <!--<div class="order-3 p-2">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a (click)="setFilter()" class="dropdown-item" href="">Action</a>
+                <a (click)="setFilter()" class="dropdown-item" href="">Another action</a>
+                <a (click)="setFilter()" class="dropdown-item" href="">Something else here</a>
+            </div>
+        </div>
+    </div>-->
+</div>
+
 <div class="list-group">
     <a *ngFor="let post of posts" class="list-group-item list-group-item-action flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">

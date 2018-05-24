@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 import { RootComponent } from './root/root.component';
 import { ROUTING } from './app.routing';
@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { ShowPostComponent } from './show-post/show-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { CommonService } from './service/common.service';
+import { ShowPostService } from './show-post/show-post.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { CommonService } from './service/common.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CommonService],
+  providers: [CommonService, ShowPostService],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

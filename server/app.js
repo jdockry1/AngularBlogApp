@@ -55,13 +55,51 @@ app.post('/api/user/create', (req, res) => {
 app.post('/api/post/getAllPosts', (req, res) => {
     mongoose.connect(url, function(err) {
         if(err) throw err;
-        Post.find({},[],{ sort: { _id: -1 } },(err, doc) => {
+        switch(req.body.sort) {
+            case "alpha":
+                Post.find({"title" : {$regex : ".*" + req.body.search + ".*"}} ,[], { sort: { title: -1 } },(err, doc) => {
+                    if(err) throw err;
+                    return res.status(200).json({
+                        status: 'success',
+                        data: doc
+                    })
+                })
+                break;
+            case "chron":
+                Post.find({"title" : {$regex : ".*" + req.body.search + ".*"}} ,[], { sort: { date_posted: -1 } },(err, doc) => {
+                    if(err) throw err;
+                    return res.status(200).json({
+                        status: 'success',
+                        data: doc
+                    })
+                })
+                break;
+            case "upvotes":
+                Post.find({"title" : {$regex : ".*" + req.body.search + ".*"}} ,[], { sort: { upvotes: -1 } },(err, doc) => {
+                    if(err) throw err;
+                    return res.status(200).json({
+                        status: 'success',
+                        data: doc
+                    })
+                })
+                break;
+            case "downvotes":
+                Post.find({"title" : {$regex : ".*" + req.body.search + ".*"}} ,[], { sort: { downvotes: -1 } },(err, doc) => {
+                    if(err) throw err;
+                    return res.status(200).json({
+                        status: 'success',
+                        data: doc
+                    })
+                })
+                break;
+        }
+        /*Post.find({"title" : {$regex : ".*" + req.body.search + ".*"}} ,[], { sort: { title: -1 } },(err, doc) => {
             if(err) throw err;
             return res.status(200).json({
                 status: 'success',
                 data: doc
             })
-        })
+        })*/
     });
 });
 
@@ -72,7 +110,7 @@ app.post('/api/post/createPost', (req, res) => {
             title: req.body.title,
             description: req.body.description,
             author: req.body.author,
-            date_posted: req.body.date_posted,
+            //date_posted: req.body.date_posted,
             upvotes: req.body.upvotes,
             downvotes: req.body.downvotes
         })
