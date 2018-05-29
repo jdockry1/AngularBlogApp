@@ -34,21 +34,32 @@ app.post('/api/user/login', (req, res) => {
 	});
 })
 
-app.post('/api/user/create', (req, res) => {
+app.post('/api/user/signup', (req, res) => {
 	mongoose.connect(url, function(err) {
 		if(err) throw err;
 		const user = new User({
 			name: req.body.name,
 			username: req.body.username,
 			password: req.body.password
-		})
-		user.save((err, res) => {
-			if(err) throw err;
-			return res.status(200).json({
-				status: 'success',
-				data: res
-			})
-		})
+        })
+        User.find({ username: req.body.username }, (err, doc) => {
+            if(err) throw err;
+            if(doc.length != 0) {
+                return res.status(409).json({
+                    status: 'conflict',
+                    data: doc
+                })
+            }
+            else {
+                user.save(function (err, doc){
+                    if(err) throw err;
+                    return res.status(200).json({
+                        status: 'success',
+                        data: doc
+                    })
+                })
+            }
+        })
 	});
 })
 

@@ -11,6 +11,9 @@ import { ShowPostComponent } from './show-post/show-post.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { CommonService } from './service/common.service';
 import { ShowPostService } from './show-post/show-post.service';
+import { SignupComponent } from './signup/signup.component';
+import { AlertComponent } from './alerts/alert.component';
+import { AlertService } from './alerts/alert.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { ShowPostService } from './show-post/show-post.service';
     LoginComponent,
     HomeComponent,
     ShowPostComponent,
-    AddPostComponent
+    AddPostComponent,
+    SignupComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,7 @@ import { ShowPostService } from './show-post/show-post.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CommonService, ShowPostService],
+  providers: [CommonService, ShowPostService, AlertService],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

@@ -37,4 +37,8 @@ export class LoginComponent {
             alert('enter user name and password');
         }
     }
+
+    createAccount() {
+        this.router.navigate(["/signup"]);
+    }
 };
